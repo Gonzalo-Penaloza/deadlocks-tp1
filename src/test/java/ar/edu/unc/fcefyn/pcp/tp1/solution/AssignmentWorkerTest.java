@@ -45,10 +45,11 @@ class AssignmentWorkerTest {
             OrderBuffer waitingValidation = new OrderBuffer(10, assigners);
             PrinterManager printers = new PrinterManager(config.printerRows(), config.printerColumns());
             SimulationLogger logger = new SimulationLogger(outputDirectory);
+            OrderRegistry orders = new OrderRegistry(totalOrders, logger);
 
             List<Thread> threads = new ArrayList<>();
             for (int i = 1; i <= assigners; i++) {
-                threads.add(new Thread(new AssignmentWorker(config, created, waitingValidation, logger, printers),
+                threads.add(new Thread(new AssignmentWorker(config, created, waitingValidation, orders, printers),
                         "assignment-" + i));
             }
 
@@ -86,8 +87,9 @@ class AssignmentWorkerTest {
             }
 
             List<String> lines = Files.readAllLines(outputDirectory.resolve("eventos.csv"));
-            assertEquals(totalOrders + 1, lines.size(), "debe haber un evento por orden mas la cabecera");
-            for (String line : lines.subList(1, lines.size())) {
+            // cabecera + un ORDER_CREATED por orden + una asignacion por orden
+            assertEquals(2 * totalOrders + 1, lines.size(), "faltan o sobran eventos");
+            for (String line : lines.subList(totalOrders + 1, lines.size())) {
                 String[] f = line.split(";", -1);
                 assertTrue(f[2].startsWith("assignment-"), line);
                 assertEquals("ASSIGNMENT", f[4]);

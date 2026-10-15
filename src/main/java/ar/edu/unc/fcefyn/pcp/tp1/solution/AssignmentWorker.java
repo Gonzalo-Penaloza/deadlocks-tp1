@@ -1,6 +1,7 @@
 package ar.edu.unc.fcefyn.pcp.tp1.solution;
 
 import ar.edu.unc.fcefyn.pcp.tp1.api.SimulationConfig;
+import ar.edu.unc.fcefyn.pcp.tp1.api.OrderState;
 
 /**
  * Etapa 1: Asignacion de impresora.
@@ -14,15 +15,15 @@ public class AssignmentWorker implements Runnable {
     private final SimulationConfig config;
     private final OrderBuffer input;
     private final OrderBuffer output;
-    private final SimulationLogger logger;
+    private final OrderRegistry orders;
     private final PrinterManager printerManager;
 
     public AssignmentWorker(SimulationConfig config, OrderBuffer input, OrderBuffer output,
-                            SimulationLogger logger, PrinterManager printerManager) {
+                            OrderRegistry orders, PrinterManager printerManager) {
         this.config = config;
         this.input = input;
         this.output = output;
-        this.logger = logger;
+        this.orders = orders;
         this.printerManager = printerManager;
     }
 
@@ -39,8 +40,8 @@ public class AssignmentWorker implements Runnable {
                 }
                 Thread.sleep(config.assignmentDelayMillis());
                 String printerId = printerManager.reservePrinter(orderId);
-                logger.logEvent(0, Thread.currentThread().getName(), orderId, "ASSIGNMENT",
-                        "ORDER_STATE_CHANGED", "CREATED", "WAITING_VALIDATION", printerId);
+                orders.transition(orderId, OrderRegistry.ASSIGNMENT,
+                        OrderState.CREATED, OrderState.WAITING_VALIDATION, printerId);
                 output.push(orderId);
             }
         } catch (InterruptedException e) {
