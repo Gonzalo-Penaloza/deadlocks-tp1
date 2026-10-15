@@ -1,11 +1,21 @@
 {
-  "grupo": "REEMPLAZAR_CON_NOMBRE_DEL_GRUPO",
-  "repositorio": "REEMPLAZAR_CON_URL_DEL_REPOSITORIO",
+  "grupo": "Deadlock",
+  "repositorio": "https://github.com/Gonzalo-Penaloza/deadlocks-tp1/",
   "integrantes": [
     {
-      "nombre": "REEMPLAZAR",
-      "documento": "REEMPLAZAR",
-      "usuarioGit": "REEMPLAZAR"
+      "nombre": "Ramiro Fernandez",
+      "documento": "45590360",
+      "usuarioGit": "ramirofernandez154-art"
+    }
+    {
+      "nombre": "Luigi Nicola Pandolfi",
+      "documento": "42447176",
+      "usuarioGit": "LuigiP00"
+    }
+    {
+      "nombre": "Gonzalo Peñaloza",
+      "documento": "40441355",
+      "usuarioGit": "Gonzalo-Penaloza"
     }
   ]
 }
