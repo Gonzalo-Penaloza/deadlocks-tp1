@@ -6,17 +6,21 @@
       "nombre": "Ramiro Fernandez",
       "documento": "45590360",
       "usuarioGit": "ramirofernandez154-art"
-    }
+    },
     {
       "nombre": "Luigi Nicola Pandolfi",
       "documento": "42447176",
       "usuarioGit": "LuigiP00"
-    }
+    },
     {
       "nombre": "Gonzalo Peñaloza",
       "documento": "40441355",
       "usuarioGit": "Gonzalo-Penaloza"
+    },
+    {
+      "nombre": "Luis Zegarra",
+      "documento": "95231524",
+      "usuarioGit": ""
     }
   ]
 }
-
